@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script> 
+     <script src="https://cdn.jsdelivr.net/npm/danfojs@0.2.3/lib/bundle.min.js"></script>
+     <script src="normalRandomGeneratedNumber.js"></script>
+    <title>EJERCICIOS ESTADISTICOS DESCRIPTIVOS</title>
+</head>
+
+<body>
+    <p>JUAN PABLO DAVID ESTRADA ZÁRATE - A01364052</p>
+    <div id="plot_div_01"></div>
+    <p>EN EL PRIMER CASO TODO PERMANECE "NORMAL" CONFORME A LA DISTRIBUCIÓN NORMAL CON MEDIA IGUAL A CERO Y VARIANZA IGUAL A UNO.</p>
+    <div id="plot_div_02"></div>
+    <p>EN EL SEGUNDO CASO EL HISTOGRAMA SE DESPLAZA A LA DERECHA CONFORME LA MEDIA ES IGUAL A 80 Y LA VARIANZA IGUAL 1.</p>
+    <div id="plot_div_03"></div>
+    <p>EN EL TERCER CASO EL HISTOGRAMA COMIENZA A DISTRIBUIR LOS VALORES DE LA DISTRIBUCIÓN NORMAL UN POCO MÁS ALEJADOS DEL CENTRO DE LA MISMA. MEDIA IGUAL A CERO Y LA VARIANZA IGUAL A 12</p>
+    
+    <script>
+        // VARIABLE CON 500 DATOS CON DISTRIBUCIÓN NORMAL
+        const vectorQuinientos_01 = [], vectorQuinientos_02 = [], vectorQuinientos_03 = [];
+        // MEDIA = 0 VARIANZA = 1
+        const media   = [0,80];
+        const varianza = [1, 12];
+
+        for (let i = 0; i < 500; i += 1) {
+            vectorQuinientos_01.push(getNormallyDistributedRandomNumber(media[0], Math.sqrt(varianza[0])));
+            vectorQuinientos_02.push(getNormallyDistributedRandomNumber(media[1], Math.sqrt(varianza[0])));
+            vectorQuinientos_03.push(getNormallyDistributedRandomNumber(media[0], Math.sqrt(varianza[1])));
+
+        }
+        vQ_01 = new dfd.DataFrame(vectorQuinientos_01);
+        vQ_02 = new dfd.DataFrame(vectorQuinientos_02);
+        vQ_03 = new dfd.DataFrame(vectorQuinientos_03);
+
+        var firstLayout = {
+                    bargap: 0,
+                    bargroupgap: 0.1,
+                    barmode: "stack",
+                    title: "Histogram Vector Quinientos 01",
+                    xaxis: { title: "Value" },
+                    yaxis: { title: "Count" },
+                    marker: {
+                        color: 'rgb(142,124,195)'
+                    }
+                }
+        var secondLayout = {
+                    bargap: 0,
+                    bargroupgap: 0.1,
+                    barmode: "stack",
+                    title: "Histogram Vector Quinientos 02",
+                    xaxis: { title: "Value" },
+                    yaxis: { title: "Count" }
+                }
+        var thirdLayout = {
+                    bargap: 0,
+                    bargroupgap: 0.1,
+                    barmode: "stack",
+                    title: "Histogram Vector Quinientos 03",
+                    xaxis: { title: "Value" },
+                    yaxis: { title: "Count" }
+                }
+        vQ_01['0'].plot("plot_div_01").hist({layout: firstLayout})
+        vQ_02['0'].plot("plot_div_02").hist({layout: secondLayout})
+        vQ_03['0'].plot("plot_div_03").hist({layout: thirdLayout})
+
+        
+
+    </script>
+</body>
+
+</html>
